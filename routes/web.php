@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+    //return view('index');
+//});
+
+Route::get('/', 'ElevatorController@index');
+Route::get('/direction/up', 'ElevatorController@up');
+Route::get('/direction/down', 'ElevatorController@down');
