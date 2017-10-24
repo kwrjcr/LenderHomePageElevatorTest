@@ -15,8 +15,22 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('elevator-component', require('./components/ElevatorComponent.vue'));
 
-const app = new Vue({
-    el: '#display-info'
+const appdiv = new Vue({
+    el: '#appdiv'
+});
+
+const floorRequest = new Vue({
+    el: '#floor-requests',
+    data: {
+        message: "This is where the floor requests will be tallied."
+    }
+});
+
+const printFloor = new Vue({
+    el: '.button-floors',
+    data: {
+        message: "This is where the floor requests will be tallied."
+    }
 });

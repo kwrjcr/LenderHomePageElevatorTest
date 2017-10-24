@@ -15,6 +15,6 @@
     //return view('index');
 //});
 
-Route::get('/{currentDirection}', 'ElevatorController@index');
+Route::get('/', 'ElevatorController@index');
 Route::get('/direction/up', 'ElevatorController@direction');
 Route::get('/direction/down', 'ElevatorController@down');

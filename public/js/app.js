@@ -987,10 +987,17 @@ window.Vue = __webpack_require__(35);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__(38));
+Vue.component('elevator-component', __webpack_require__(38));
 
-var app = new Vue({
-  el: '#display-info'
+var appdiv = new Vue({
+    el: '#appdiv'
+});
+
+var floorRequest = new Vue({
+    el: '#floor-requests',
+    data: {
+        message: "This is where the floor requests will be tallied."
+    }
 });
 
 /***/ }),
@@ -42535,7 +42542,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
+Component.options.__file = "resources/assets/js/components/ElevatorComponent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -42545,9 +42552,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-03ec7638", Component.options)
+    hotAPI.createRecord("data-v-19551664", Component.options)
   } else {
-    hotAPI.reload("data-v-03ec7638", Component.options)
+    hotAPI.reload("data-v-19551664", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -42688,6 +42695,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -42715,13 +42740,88 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
           _c("div", { staticClass: "panel panel-default" }, [
             _c("div", { staticClass: "panel-heading" }, [
-              _vm._v("Example Component")
+              _vm._v("Elevator Controls")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    I'm an example component! Kevin\n                "
-              )
+              _c("div", [_vm._v("Which floor would you like?")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "'floor-buttons" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "button-floors",
+                    attrs: { name: "button-floors" }
+                  },
+                  [_vm._v("Ground (1)")]
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button-floors",
+                    attrs: { name: "button-floors" }
+                  },
+                  [_vm._v("2")]
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button-floors",
+                    attrs: { name: "button-floors" }
+                  },
+                  [_vm._v("3")]
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button-floors",
+                    attrs: { name: "button-floors" }
+                  },
+                  [_vm._v("4")]
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button-floors",
+                    attrs: { name: "button-floors" }
+                  },
+                  [_vm._v("5")]
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button-floors",
+                    attrs: { name: "button-floors" }
+                  },
+                  [_vm._v("6")]
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button-floors",
+                    attrs: { name: "button-floors" }
+                  },
+                  [_vm._v("7")]
+                )
+              ])
             ])
           ])
         ])
@@ -42734,7 +42834,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-03ec7638", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-19551664", module.exports)
   }
 }
 

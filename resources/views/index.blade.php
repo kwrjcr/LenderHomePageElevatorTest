@@ -4,9 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://unpkg.com/vue"></script>
-    <script src="{{ URL::to('js/app.js') }}"></script>
-    <link rel="stylesheet" href="{{ URL::to('css/app.css') }}">
 
     <title>Buttons!</title>
 
@@ -14,24 +11,16 @@
 
     </style>
 
-    <script>
-    </script>
-
 </head>
 <body>
-
-    <button name="elevator-button" id="up-button-id">Up</button>
-
-    <br/>
-    <br/>
-
-    <button name="elevator-button" id="down-button-id">Down</button>
-
-    <br/>
-    <br/>
-
-    <div id="display-info">
+    <div id="appdiv">
+        <elevator-component></elevator-component>
     </div>
-
+    <div id="floor-requests">
+        @{{ message }}
+    </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="{{ URL::to('js/app.js') }}"></script>
+<link rel="stylesheet" href="{{ URL::to('css/app.css') }}">
 </html>
