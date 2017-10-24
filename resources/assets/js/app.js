@@ -15,22 +15,103 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('elevator-component', require('./components/ElevatorComponent.vue'));
+
+//Vue.component('buttons', require('./components/ButtonComponent.vue'));
+
+Vue.component('buttons-list', {
+
+    template: '<div><but v-for="but in buttons" :floorNumber="but.floorNumber">{{ but.but }}</but></div>',
+
+    data() {
+        return {
+            buttons: [
+                { but: "Ground (1st Floor)", floorNumber: '1' },
+                { but: "2nd Floor", floorNumber: '2' },
+                { but: "3rd Floor", floorNumber: '3' },
+                { but: "4th Floor", floorNumber: '4' },
+                { but: "5th Floor", floorNumber: '5' },
+                { but: "6th Floor", floorNumber: '6' },
+                { but: "7th Floor", floorNumber: '1' }
+            ]
+        }
+    }
+});
+
+var floorRequests = [];
+
+Vue.component('but', {
+
+    props: [ 'floorNumber' ],
+
+    template: '<li><button @click="printFloor()"><slot></slot></button></li>',
+
+    methods: {
+        printFloor: function () {
+            floorRequests.push(this.floorNumber);
+            this.message = floorRequests;
+        }
+    }
+});
+
+
+new Vue({
+
+    el: '#root-element',
+
+    data: {
+        message: ''
+    }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+/*Vue.component('elevator-component', require('./components/ElevatorComponent.vue'));
+Vue.component('button-component', require('./components/ButtonComponent.vue'));
 
 const appdiv = new Vue({
+
     el: '#appdiv'
+
 });
 
-const floorRequest = new Vue({
-    el: '#floor-requests',
+/*var floorRequests = [];
+
+const floorButtons = new Vue({
+
+    el: '#root-element',
+
     data: {
-        message: "This is where the floor requests will be tallied."
+        message: ''
+    },
+
+    methods: {
+        printFloor: function (floorNumber) {
+            floorRequests.push(floorNumber);
+            this.message = floorRequests;
+        }
     }
+
 });
 
-const printFloor = new Vue({
-    el: '.button-floors',
+/*const floorButtons = new Vue({
+    el: '.floor-buttons',
     data: {
-        message: "This is where the floor requests will be tallied."
+        message: ''
+    },
+    methods: {
+        printFloor: function (floorNumber) {
+            floorRequests.push(floorNumber);
+            this.message = floorRequests;
+        }
     }
-});
+});*/

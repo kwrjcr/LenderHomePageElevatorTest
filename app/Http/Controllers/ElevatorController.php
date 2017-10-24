@@ -4,6 +4,11 @@ namespace ElevatorApp\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
+//eloquent model
+//each shaft is one record
+
+
 class ElevatorController extends Controller
 {
     protected $floorRequests;
