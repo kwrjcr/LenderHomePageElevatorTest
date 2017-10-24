@@ -6,29 +6,39 @@ use Illuminate\Http\Request;
 
 class ElevatorController extends Controller
 {
-    protected $direction;
+    protected $currentDirection = 'stand';
+    protected $buttonDirection;
+    protected $buttonFloor;
     protected $signal;
     protected $floorRequest;
     protected $currentFloor;
 
-    public function index(Request $request)
+    public function index($currentDirection)
     {
         echo "Index!";
-
-        /*if ($request == 'up') {
-            $this->up();
-        }*/
-
-        //return view('index');
+        //array format = (from, to, elevator coming from, direction to get to from floor, direction to get to to floor)
+        echo "<br/>";
+        echo $currentDirection;
+        echo "<br/>";
+        return view('index');
     }
 
-    public function up()
+    public function direction()
     {
-        echo "Up!";
-        //return view('index');
+        //possible directions up, down, stand, maintenance
+        //return redirect('/');
+        $this->currentDirection = 'up';
+        return redirect('/'.$this->currentDirection);
+            //->action('ElevatorController@index', ['currentDirection' => $this->currentDirection]);
+
     }
 
-    public function down()
+    public function signals()
+    {
+        //possible signals: alarm, door_open, door_close
+    }
+
+    /*public function down()
     {
         echo "Down!";
 
@@ -58,4 +68,5 @@ class ElevatorController extends Controller
     {
 
     }
+    */
 }
