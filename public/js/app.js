@@ -989,18 +989,26 @@ window.Vue = __webpack_require__(35);
 
 //Vue.component('buttons', require('./components/ButtonComponent.vue'));
 
+var floorRequests = [];
+
 Vue.component('buttons-list', {
 
-    template: '<div><but v-for="but in buttons" :floorNumber="but.floorNumber">{{ but.but }}</but></div>',
+    template: '<div><but v-for="but in buttons" :floorNumber="but.floorNumber">{{ but.but }}</but><button @click="clearFloorRequests()">Clear Floor Requests</button></div>',
 
     data: function data() {
         return {
             buttons: [{ but: "Ground (1st Floor)", floorNumber: '1' }, { but: "2nd Floor", floorNumber: '2' }, { but: "3rd Floor", floorNumber: '3' }, { but: "4th Floor", floorNumber: '4' }, { but: "5th Floor", floorNumber: '5' }, { but: "6th Floor", floorNumber: '6' }, { but: "7th Floor", floorNumber: '1' }]
         };
+    },
+
+
+    methods: {
+        clearFloorRequests: function clearFloorRequests() {
+            app.message = '';
+            floorRequests = [];
+        }
     }
 });
-
-var floorRequests = [];
 
 Vue.component('but', {
 
@@ -1011,12 +1019,13 @@ Vue.component('but', {
     methods: {
         printFloor: function printFloor() {
             floorRequests.push(this.floorNumber);
-            this.message = floorRequests;
+            app.message = floorRequests;
         }
+
     }
 });
 
-new Vue({
+app = new Vue({
 
     el: '#root-element',
 
@@ -1026,46 +1035,7 @@ new Vue({
 
 });
 
-/*Vue.component('elevator-component', require('./components/ElevatorComponent.vue'));
-Vue.component('button-component', require('./components/ButtonComponent.vue'));
-
-const appdiv = new Vue({
-
-    el: '#appdiv'
-
-});
-
-/*var floorRequests = [];
-
-const floorButtons = new Vue({
-
-    el: '#root-element',
-
-    data: {
-        message: ''
-    },
-
-    methods: {
-        printFloor: function (floorNumber) {
-            floorRequests.push(floorNumber);
-            this.message = floorRequests;
-        }
-    }
-
-});
-
-/*const floorButtons = new Vue({
-    el: '.floor-buttons',
-    data: {
-        message: ''
-    },
-    methods: {
-        printFloor: function (floorNumber) {
-            floorRequests.push(floorNumber);
-            this.message = floorRequests;
-        }
-    }
-});*/
+/*Vue.component('elevator-component', require('./components/ElevatorComponent.vue'));*/
 
 /***/ }),
 /* 11 */
