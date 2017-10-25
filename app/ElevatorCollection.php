@@ -16,3 +16,5 @@ class ElevatorCollection extends \Illuminate\Database\Eloquent\Collection
     }
 
 }
+
+//`Elevator::getClosestToFloor(1)->getAvailable()`

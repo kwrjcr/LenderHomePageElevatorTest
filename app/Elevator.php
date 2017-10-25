@@ -13,7 +13,7 @@ class Elevator extends Model
     *
     * @var string
     */
-   protected $table = "elevator_shafts";
+   protected $table = "elevator";
 
 
    /*

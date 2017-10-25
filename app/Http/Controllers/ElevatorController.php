@@ -5,6 +5,7 @@ namespace ElevatorApp\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use ElevatorApp\Elevator;
 
 
 //eloquent model
@@ -15,18 +16,6 @@ class ElevatorController extends Controller
 {
     protected $floorRequests;
     protected $currentFloor;
-
-    /*
-        ```class ElevatorCollection extends \Illuminate\Database\Eloquent\Collection {
-            public function getClosestToFloor($floor) {
-                return $this->reject(function ($elevator) {
-                    return $elevator->active === false;
-                })
-            }
-        }```
-
-        `Elevator::getClosestToFloor(1)->getAvailable()`
-    */
 
     public function index()
     {
@@ -41,18 +30,8 @@ class ElevatorController extends Controller
 
         print("<pre>"); print_r($floorRequests); print("</pre>");
         */
+
         return view('index');
-    }
-
-    public function direction()
-    {
-        //possible directions: up, down, stand, maintenance
-
-    }
-
-    public function signals()
-    {
-        //possible signals: alarm, door_open, door_close
     }
 
     /*
