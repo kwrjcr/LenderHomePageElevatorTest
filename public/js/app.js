@@ -987,8 +987,6 @@ window.Vue = __webpack_require__(35);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-//Vue.component('buttons', require('./components/ButtonComponent.vue'));
-
 var floorRequests = [];
 
 Vue.component('buttons-list', {
@@ -1032,7 +1030,6 @@ app = new Vue({
     data: {
         message: ''
     }
-
 });
 
 /*Vue.component('elevator-component', require('./components/ElevatorComponent.vue'));*/

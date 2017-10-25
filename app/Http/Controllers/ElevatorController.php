@@ -2,6 +2,8 @@
 
 namespace ElevatorApp\Http\Controllers;
 
+
+
 use Illuminate\Http\Request;
 
 
@@ -14,9 +16,20 @@ class ElevatorController extends Controller
     protected $floorRequests;
     protected $currentFloor;
 
+    /*
+        ```class ElevatorCollection extends \Illuminate\Database\Eloquent\Collection {
+            public function getClosestToFloor($floor) {
+                return $this->reject(function ($elevator) {
+                    return $elevator->active === false;
+                })
+            }
+        }```
+
+        `Elevator::getClosestToFloor(1)->getAvailable()`
+    */
+
     public function index()
     {
-
         /*
         $this->floorRequests = [['requestedFloor' => 1, 'direction' => 'down'], ['requestedFloor' => 7, 'direction' => 'up'], ['requestedFloor' => 1, 'direction' => 'down'], ['requestedFloor' => 7, 'direction' => 'up']];
         $this->currentFloor = 1;
