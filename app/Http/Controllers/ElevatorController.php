@@ -14,26 +14,34 @@ class ElevatorController extends Controller
 
     public function index()
     {
-        $elevator = Elevator::all();
-
-        if (empty($elevator->getMovingTowards(3, 'up'))) {
-            echo "";
-        } else {
-            echo "";
-            //foreach($elevator->getClosestStanding(3, 'up') as $item) {
-                //echo $item->id."<br/>";
-            //}
-        }
-
         return view('index');
     }
 
-    public function update()
+    public function show(Request $request)
     {
 
     }
 
-    public function delete()
+    public function update(Request $request)
+    {
+        $floor = $request['floor'];
+        $direction = '';
+
+        $elevator = Elevator::all();
+
+
+        if(!empty($elevator->getAvailable($floor))) {
+
+        } elseif (!empty($elevator->getMovingTowards($floor, $direction))) {
+
+        } elseif (!empty($elevator->getClosestStanding($floor))) {
+
+        };
+
+
+    }
+
+    public function delete(Request $request)
     {
 
     }

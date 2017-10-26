@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('../../../node_modules/axios');
 
 window.Vue = require('vue');
 
@@ -30,12 +31,14 @@ Vue.component('buttons-list', {
                 { but: "4th Floor", floorNumber: '4' },
                 { but: "5th Floor", floorNumber: '5' },
                 { but: "6th Floor", floorNumber: '6' },
-                { but: "7th Floor", floorNumber: '1' }
+                { but: "7th Floor", floorNumber: '7' }
             ]
         }
     },
 
     methods: {
+
+
         clearFloorRequests: function () {
             app.message = '';
             floorRequests = [];
@@ -47,14 +50,23 @@ Vue.component('but', {
 
     props: [ 'floorNumber' ],
 
-    template: '<li><button @click="printFloor()"><slot></slot></button></li>',
+    template: '<li><button @click="sendRequest()"><slot></slot></button></li>',
 
     methods: {
+        sendRequest() {
+            axios
+                .post('/elevator', {
+                    floor: this.floorNumber
+                })
+                .then(function (response) {
+                    app.message = response['data'];
+                })
+        },
+
         printFloor: function () {
             floorRequests.push(this.floorNumber);
             app.message = floorRequests;
         }
-
     }
 });
 
@@ -64,6 +76,10 @@ app = new Vue({
 
     data: {
         message: ''
+    },
+
+    mounted() {
+        axios.post('/elevator').then(response => console.log(response))
     }
 });
 

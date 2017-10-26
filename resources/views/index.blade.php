@@ -15,7 +15,9 @@
 </head>
 <body>
     <div id="root-element">
-        <buttons-list></buttons-list><br />
+        <ul class="list-buttons">
+            <buttons-list></buttons-list><br />
+        </ul>
         @{{ message }}
     </div>
 </body>
