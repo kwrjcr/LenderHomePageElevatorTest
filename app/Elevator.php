@@ -3,7 +3,6 @@
 namespace ElevatorApp;
 
 
-use ElevatorApp\ElevatorCollection;
 use Illuminate\Database\Eloquent\Model;
 
 class Elevator extends Model

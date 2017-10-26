@@ -2,14 +2,9 @@
 
 namespace ElevatorApp\Http\Controllers;
 
-
-
 use Illuminate\Http\Request;
 use ElevatorApp\Elevator;
-
-
-//eloquent model
-//each shaft is one record
+use ElevatorApp\ElevatorCollection;
 
 
 class ElevatorController extends Controller
@@ -19,50 +14,27 @@ class ElevatorController extends Controller
 
     public function index()
     {
-        /*
-        $this->floorRequests = [['requestedFloor' => 1, 'direction' => 'down'], ['requestedFloor' => 7, 'direction' => 'up'], ['requestedFloor' => 1, 'direction' => 'down'], ['requestedFloor' => 7, 'direction' => 'up']];
-        $this->currentFloor = 1;
+        $elevator = Elevator::all();
 
-        $floorRequests = array(
-                        'currentFloor' => $this->currentFloor,
-                        'floorRequests' => $this->floorRequests
-        );
-
-        print("<pre>"); print_r($floorRequests); print("</pre>");
-        */
+        if (empty($elevator->getMovingTowards(3, 'up'))) {
+            echo "";
+        } else {
+            echo "";
+            //foreach($elevator->getClosestStanding(3, 'up') as $item) {
+                //echo $item->id."<br/>";
+            //}
+        }
 
         return view('index');
     }
 
-    /*
-    public function down()
-    {
-        echo "Down!";
-    }
-
-    public function stand()
+    public function update()
     {
 
     }
 
-    public function maintenance()
+    public function delete()
     {
 
     }
-
-    public function alarm()
-    {
-
-    }
-
-    public function door_open()
-    {
-
-    }
-
-    public function door_close()
-    {
-
-    }
-    */
 }
