@@ -16,5 +16,5 @@
 //});
 
 Route::get('/', 'ElevatorController@index');
-Route::post('/elevator', 'ElevatorController@update');
+Route::post('/update', 'ElevatorController@update');
 

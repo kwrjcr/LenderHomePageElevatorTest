@@ -18,8 +18,8 @@
         <ul class="list-buttons">
             <buttons-list></buttons-list><br />
         </ul>
-        <span class="current-floor"><h3>Current Floor: </h3> @{{ current_floor }}</span>
-        <span class="class-message">@{{ message }}</span>
+        {{-- <span class="current-floor"><h3>Current Floor: </h3> @{{ current_floor }}</span>
+        <span class="class-message">@{{ message }}</span> --}}
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>

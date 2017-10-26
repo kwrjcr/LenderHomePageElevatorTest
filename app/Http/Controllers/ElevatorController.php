@@ -16,6 +16,12 @@ class ElevatorController extends Controller
 
     public function update(Request $request)
     {
+
+        echo $request;
+
+        die();
+
+        /*
         $floor = $request['floor'];
         $currentFloor = $request['currentFloor'];
 
@@ -40,6 +46,7 @@ class ElevatorController extends Controller
             return $elevator->getClosestStanding($floor);
 
         };
+        */
     }
 
 }
