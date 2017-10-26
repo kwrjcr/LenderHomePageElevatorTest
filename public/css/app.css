@@ -8365,3 +8365,9 @@ ul.list-buttons {
   margin-left: 75px;
 }
 
+.current-floor {
+  position: relative;
+  top: -320px;
+  left: 0px;
+}
+

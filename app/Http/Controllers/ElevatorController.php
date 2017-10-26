@@ -25,20 +25,30 @@ class ElevatorController extends Controller
     public function update(Request $request)
     {
         $floor = $request['floor'];
-        $direction = '';
+        //$current_floor = $request['current_floor'];
+        $current_floor = 1;
+
+        if ($current_floor > $floor) {
+            $direction = 'down';
+        } else {
+            $direction = 'up';
+        }
 
         $elevator = Elevator::all();
 
+        if(empty($elevator->getAvailable($floor))) {
 
-        if(!empty($elevator->getAvailable($floor))) {
+            return $elevator->getAvailable($floor);
 
-        } elseif (!empty($elevator->getMovingTowards($floor, $direction))) {
+        } elseif (empty($elevator->getMovingTowards($floor, $direction))) {
 
-        } elseif (!empty($elevator->getClosestStanding($floor))) {
+            return $elevator->getMovingTowards($floor, $direction);
+
+        } elseif (empty($elevator->getClosestStanding($floor))) {
+
+            return $elevator->getClosestStanding($floor);
 
         };
-
-
     }
 
     public function delete(Request $request)

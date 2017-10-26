@@ -998,7 +998,9 @@ var floorRequests = [];
 
 Vue.component('buttons-list', {
 
-    template: '<div><but v-for="but in buttons" :floorNumber="but.floorNumber">{{ but.but }}</but><button @click="clearFloorRequests()">Clear Floor Requests</button></div>',
+    template: '<div><but v-for="but in buttons" :floorNumber="but.floorNumber">{{ but.but }}</but></div>',
+
+    //'<button @click="clearFloorRequests()">Clear Floor Requests</button></div>',
 
     data: function data() {
         return {
@@ -1036,7 +1038,6 @@ Vue.component('but', {
             floorRequests.push(this.floorNumber);
             app.message = floorRequests;
         }
-
     }
 });
 
@@ -1045,13 +1046,8 @@ app = new Vue({
     el: '#root-element',
 
     data: {
-        message: ''
-    },
-
-    mounted: function mounted() {
-        axios.post('/elevator').then(function (response) {
-            return console.log(response);
-        });
+        message: '',
+        current_floor: ''
     }
 });
 
