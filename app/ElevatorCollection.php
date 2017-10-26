@@ -29,21 +29,41 @@ class ElevatorCollection extends \Illuminate\Database\Eloquent\Collection
         });
     }
 
-    public function getClosestStanding($floor) {
-        $elevator = $this->getStanding($floor);
+    /*public function getClosestStanding($floor) {
+        $elevators = $this->getStanding($floor);
 
-        $plus_floor = $floor++;
-        $minus_floor = $floor--;
+        $plusFloor = $floor++;
+        $minusFloor = $floor--;
 
-        foreach($elevator as $e) {
+        foreach($elevators as $e) {
 
-            if ($e['currentFloor'] == $plus_floor || $e['currentFloor'] == $minus_floor) {
+            if ($e['currentFloor'] == $plusFloor || $e['currentFloor'] == $minusFloor) {
                 return $e;
             };
 
-            $plus_floor = $plus_floor++;
-            $minus_floor = $minus_floor--;
+            $plusFloor = $plusFloor++;
+            $minusFloor = $minusFloor--;
 
         }
+    }*/
+
+    public function getClosestStanding2($floor) {
+        $elevators = $this->getStanding($floor);
+
+        $elevatorsByFloor = [];
+        foreach($elevators as $elevator) {
+            if (!isset($elevatorsByFloor[$elevator->currentFloor])) {
+                $elevatorsByFloor[$elevator->currentFloor] = [];
+            }
+            $elevatorsByFloor[$elevator->currentFloor][] = $elevator;
+        }
+        ksort($elevatorsByFloor);
+        $elevatorsByDistance = [];
+        foreach ($elevatorsByFloor as $currentFloor => $elevators) {
+            $distance = $currentFloor >= $floor ? $currentFloor - $floor : $floor - $currentFloor;
+            $elevatorsByDistance[$distance] = array_merge(!isset($elevatorsByDistance[$distance]) ? [] : $elevatorsByDistance[$distance], $elevators);
+        }
+        ksort($elevatorsByDistance);
+        return current($elevatorsByDistance);
     }
 }

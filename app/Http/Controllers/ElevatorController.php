@@ -9,26 +9,18 @@ use ElevatorApp\ElevatorCollection;
 
 class ElevatorController extends Controller
 {
-    protected $floorRequests;
-    protected $currentFloor;
-
     public function index()
     {
         return view('index');
     }
 
-    public function show(Request $request)
-    {
-
-    }
-
     public function update(Request $request)
     {
         $floor = $request['floor'];
-        //$current_floor = $request['current_floor'];
-        $current_floor = 1;
+        $currentFloor = $request['current_floor'];
+        //$currentFloor = 1;
 
-        if ($current_floor > $floor) {
+        if ($currentFloor > $floor) {
             $direction = 'down';
         } else {
             $direction = 'up';
@@ -51,8 +43,4 @@ class ElevatorController extends Controller
         };
     }
 
-    public function delete(Request $request)
-    {
-
-    }
 }
