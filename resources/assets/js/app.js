@@ -56,7 +56,7 @@ Vue.component('but', {
             axios
                 .post('/elevator', {
                     floor: this.floorNumber,
-                    currentFloor: app.currentFloor
+                    elavatorCurrentFloor: app.currentFloor
                 })
                 .then(function (response) {
                     app.message = response['data'];

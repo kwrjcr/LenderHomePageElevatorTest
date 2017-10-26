@@ -27,10 +27,3 @@
 <link rel="stylesheet" href="{{ URL::to('css/app.css') }}">
 </html>
 
-{{-- <div id="appdiv">
-    <elevator-component></elevator-component>
-</div>
-<div class="floor-buttons">
-    @{{ message }}
-    <button-component></button-component>
-</div> --}}
