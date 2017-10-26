@@ -29,25 +29,7 @@ class ElevatorCollection extends \Illuminate\Database\Eloquent\Collection
         });
     }
 
-    /*public function getClosestStanding($floor) {
-        $elevators = $this->getStanding($floor);
-
-        $plusFloor = $floor++;
-        $minusFloor = $floor--;
-
-        foreach($elevators as $e) {
-
-            if ($e['currentFloor'] == $plusFloor || $e['currentFloor'] == $minusFloor) {
-                return $e;
-            };
-
-            $plusFloor = $plusFloor++;
-            $minusFloor = $minusFloor--;
-
-        }
-    }*/
-
-    public function getClosestStanding2($floor) {
+    public function getClosestStanding($floor) {
         $elevators = $this->getStanding($floor);
 
         $elevatorsByFloor = [];

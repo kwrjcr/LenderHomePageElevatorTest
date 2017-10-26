@@ -1027,16 +1027,11 @@ Vue.component('but', {
     methods: {
         sendRequest: function sendRequest() {
             axios.post('/elevator', {
-                floor: this.floorNumber
+                floor: this.floorNumber,
+                currentFloor: "1"
             }).then(function (response) {
                 app.message = response['data'];
             });
-        },
-
-
-        printFloor: function printFloor() {
-            floorRequests.push(this.floorNumber);
-            app.message = floorRequests;
         }
     }
 });

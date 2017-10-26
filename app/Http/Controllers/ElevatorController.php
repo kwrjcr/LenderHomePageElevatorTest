@@ -17,8 +17,7 @@ class ElevatorController extends Controller
     public function update(Request $request)
     {
         $floor = $request['floor'];
-        $currentFloor = $request['current_floor'];
-        //$currentFloor = 1;
+        $currentFloor = $request['currentFloor'];
 
         if ($currentFloor > $floor) {
             $direction = 'down';
