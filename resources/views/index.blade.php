@@ -15,11 +15,13 @@
 </head>
 <body>
     <div id="root-element">
+        <span class="users-floor">Please choose user's current floor.</span>
+        <span class="request-floor">Which floor would you like to go to?</span>
         <ul class="list-buttons">
             <buttons-list></buttons-list><br />
         </ul>
-        {{-- <span class="current-floor"><h3>Current Floor: </h3> @{{ current_floor }}</span>
-        <span class="class-message">@{{ message }}</span> --}}
+        <span class="class-elevator"><h1>@{{ elevator }}</h1></span>
+        <span class="class-destination"><h1>@{{ destination }}</h1></span>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>

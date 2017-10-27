@@ -1020,7 +1020,14 @@ Vue.component('buttons-list', {
                 userFloor: userFloor,
                 floorRequest: floorRequest
             }).then(function (response) {
-                app.message = response['data'];
+
+                if (response['data']['destination'] == 2 || response['data']['destination'] == 4) {
+                    app.elevator = "Floor " + response['data']['destination'] + " is down for maintenance";
+                    app.destination = "Please choose a different floor";
+                } else {
+                    app.elevator = "Elevator #" + response['data']['id'] + " is now heading to: ";
+                    app.destination = "floor " + response['data']['destination'];
+                }
             });
         }
     }
@@ -1058,7 +1065,8 @@ app = new Vue({
     el: '#root-element',
 
     data: {
-        message: '',
+        destination: '',
+        elevator: '',
         floorRequests: [],
         userFloor: 0,
         floorRequest: 0

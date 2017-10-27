@@ -30,6 +30,7 @@ class ElevatorController extends Controller
         $requestLog = new FloorRequests();
         $requestLog->userFloor = $floor;
         $requestLog->floorRequest = $floorRequest;
+        $requestLog->active = 1;
         $requestLog->save();
 
         $chosenElevator = [];
@@ -53,12 +54,16 @@ class ElevatorController extends Controller
             $id = $e->id;
         }
 
-        $elevatorRequest = Elevator::find($id);
+        if ($floorRequest != 2 || $floorRequest != 4) {
 
-        $elevatorRequest->destination = $floorRequest;
-        $elevatorRequest->save();
+            $elevatorRequest = Elevator::find($id);
 
-        return $elevatorRequest;
+            $elevatorRequest->destination = $floorRequest;
+            $elevatorRequest->save();
+        }
+
+
+
+        return ['destination' => $elevatorRequest->destination, 'direction' => $elevatorRequest->direction, 'signal' => $elevatorRequest->signal, 'currentFloor' => $elevatorRequest->currentFloor, 'id' => $elevatorRequest->id];
     }
-
 }
