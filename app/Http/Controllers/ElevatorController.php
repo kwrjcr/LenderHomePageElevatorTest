@@ -3,9 +3,10 @@
 namespace ElevatorApp\Http\Controllers;
 
 use Illuminate\Http\Request;
-use ElevatorApp\Elevator;
+use ElevatorApp\Elevators;
 use ElevatorApp\ElevatorCollection;
 use ElevatorApp\FloorRequests;
+use ElevatorApp\RequestsLog;
 
 
 class ElevatorController extends Controller
@@ -18,8 +19,8 @@ class ElevatorController extends Controller
     public function update(Request $request)
     {
 
-        $floor = $request['userFloor'];
-        $floorRequest = $request['floorRequest'];
+        $floor = $request->userFloor;
+        $floorRequest = $request->floorRequest;
 
         if ($floorRequest < $floor) {
             $direction = 'down';
@@ -27,42 +28,35 @@ class ElevatorController extends Controller
             $direction = 'up';
         }
 
-        $requestLog = new FloorRequests();
+        $requestLog = new RequestsLog();
         $requestLog->userFloor = $floor;
         $requestLog->floorRequest = $floorRequest;
-        $requestLog->active = 1;
         $requestLog->save();
 
-        $chosenElevator = [];
+        $chosenElevators = [];
         $elevator = Elevator::all();
 
         if($elevator->getAvailable($floor)->count() > 0) {
-
-            $chosenElevator = $elevator->getAvailable($floor);
-
+            $chosenElevators = $elevator->getAvailable($floor);
         } elseif ($elevator->getMovingTowards($floor, $direction)->count() > 0) {
-
-            $chosenElevator = $elevator->getMovingTowards($floor, $direction);
-
+            $chosenElevators = $elevator->getMovingTowards($floor, $direction);
         } elseif (!empty($elevator->getClosestStanding($floor))) {
-
-            $chosenElevator = $elevator->getClosestStanding($floor);
-
+            $chosenElevators = $elevator->getClosestStanding($floor);
         };
 
-        foreach($chosenElevator as $e) {
-            $id = $e->id;
-        }
 
-        if ($floorRequest != 2 || $floorRequest != 4) {
+        $id = current($chosenElevators)->id;
 
+
+        //check this
+        if ($floorRequest == 2 || $floorRequest == 4) {
+
+        } else {
             $elevatorRequest = Elevator::find($id);
 
             $elevatorRequest->destination = $floorRequest;
             $elevatorRequest->save();
         }
-
-
 
         return ['destination' => $elevatorRequest->destination, 'direction' => $elevatorRequest->direction, 'signal' => $elevatorRequest->signal, 'currentFloor' => $elevatorRequest->currentFloor, 'id' => $elevatorRequest->id];
     }
