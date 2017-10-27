@@ -5,6 +5,7 @@ namespace ElevatorApp\Http\Controllers;
 use Illuminate\Http\Request;
 use ElevatorApp\Elevator;
 use ElevatorApp\ElevatorCollection;
+use ElevatorApp\FloorRequests;
 
 
 class ElevatorController extends Controller
@@ -17,36 +18,47 @@ class ElevatorController extends Controller
     public function update(Request $request)
     {
 
-        echo $request;
+        $floor = $request['userFloor'];
+        $floorRequest = $request['floorRequest'];
 
-        die();
-
-        /*
-        $floor = $request['floor'];
-        $currentFloor = $request['currentFloor'];
-
-        if ($currentFloor > $floor) {
+        if ($floorRequest < $floor) {
             $direction = 'down';
         } else {
             $direction = 'up';
         }
 
+        $requestLog = new FloorRequests();
+        $requestLog->userFloor = $floor;
+        $requestLog->floorRequest = $floorRequest;
+        $requestLog->save();
+
+        $chosenElevator = [];
         $elevator = Elevator::all();
 
-        if(empty($elevator->getAvailable($floor))) {
+        if($elevator->getAvailable($floor)->count() > 0) {
 
-            return $elevator->getAvailable($floor);
+            $chosenElevator = $elevator->getAvailable($floor);
 
-        } elseif (empty($elevator->getMovingTowards($floor, $direction))) {
+        } elseif ($elevator->getMovingTowards($floor, $direction)->count() > 0) {
 
-            return $elevator->getMovingTowards($floor, $direction);
+            $chosenElevator = $elevator->getMovingTowards($floor, $direction);
 
-        } elseif (empty($elevator->getClosestStanding($floor))) {
+        } elseif (!empty($elevator->getClosestStanding($floor))) {
 
-            return $elevator->getClosestStanding($floor);
+            $chosenElevator = $elevator->getClosestStanding($floor);
 
         };
-        */
+
+        foreach($chosenElevator as $e) {
+            $id = $e->id;
+        }
+
+        $elevatorRequest = Elevator::find($id);
+
+        $elevatorRequest->destination = $floorRequest;
+        $elevatorRequest->save();
+
+        return $elevatorRequest;
     }
 
 }

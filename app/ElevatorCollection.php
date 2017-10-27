@@ -3,6 +3,7 @@
 namespace ElevatorApp;
 
 use ElevatorApp\Floor;
+use ElevatorApp\FloorRequests;
 
 
 class ElevatorCollection extends \Illuminate\Database\Eloquent\Collection

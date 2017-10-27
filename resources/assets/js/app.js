@@ -55,7 +55,8 @@ Vue.component('buttons-list', {
 
             axios
                 .post('/update', {
-                    floorRequests: floorRequests
+                    userFloor: userFloor,
+                    floorRequest: floorRequest
                 })
                 .then(function (response) {
                     app.message = response['data'];
