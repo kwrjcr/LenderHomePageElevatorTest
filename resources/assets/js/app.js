@@ -59,8 +59,9 @@ Vue.component('buttons-list', {
                     floorRequest: floorRequest
                 })
                 .then(function (response) {
+                    console.log(response['data']);
 
-                    if (response['data']['destination'] == 2 || response['data']['destination'] == 4) {
+                    if (response['data']['direction'] == 'empty') {
                         app.elevator = "Floor " + response['data']['destination'] + " is down for maintenance";
                         app.destination = "Please choose a different floor";
                     } else {

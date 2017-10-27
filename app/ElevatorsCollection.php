@@ -6,7 +6,7 @@ use ElevatorApp\Floor;
 use ElevatorApp\FloorRequests;
 
 
-class ElevatorCollection extends \Illuminate\Database\Eloquent\Collection
+class ElevatorsCollection extends \Illuminate\Database\Eloquent\Collection
 {
     public function getAvailable($floor) {
         return $this->filter(function ($elevator) use ($floor) {

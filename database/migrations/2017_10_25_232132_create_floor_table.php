@@ -16,7 +16,7 @@ class CreateFloorTable extends Migration
         Schema::create('floor', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('floor', [1, 2, 3, 4, 5, 6, 7]);
-            $table->integer('status');
+            $table->enum('status', ['working', 'maintenance']);
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateElevatorTable extends Migration
+class CreateElevatorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateElevatorTable extends Migration
      */
     public function up()
     {
-        Schema::create('elevator', function (Blueprint $table) {
+        Schema::create('elevators', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('signal', ['alarm', 'door open', 'door close']);
             $table->enum('direction', ['up', 'down', 'stand', 'maintenance']);
@@ -31,6 +31,6 @@ class CreateElevatorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('elevator');
+        Schema::dropIfExists('elevators');
     }
 }

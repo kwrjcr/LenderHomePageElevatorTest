@@ -1000,11 +1000,11 @@ var userFloor;
 
 Vue.component('buttons-list', {
 
-    template: '<div><div class="userFloor"><userFloor v-for="userFloor in userFloors" :floorNumber="userFloor.floorNumber">{{ userFloor.userFloor }}</userFloor></div><div class="floorRequest"><but v-for="but in buttons" :floorNumber="but.floorNumber">{{ but.but }}</but></div><div class="sendRequest"><button @click="sendRequest()">Send Request</button></div></div>',
+    template: '<div><div class="userFloor"><userFloor v-for="userFloor in userFloors" :floorNumber="userFloor.floorNumber">{{ userFloor.userFloor }}</userFloor></div><div class="floorRequest"><btn v-for="btn in buttons" :floorNumber="btn.floorNumber">{{ btn.btn }}</btn></div><div class="sendRequest"><button @click="sendRequest()">Send Request</button></div></div>',
 
     data: function data() {
         return {
-            buttons: [{ but: "Ground (1st Floor)", floorNumber: '1' }, { but: "2nd Floor", floorNumber: '2' }, { but: "3rd Floor", floorNumber: '3' }, { but: "4th Floor", floorNumber: '4' }, { but: "5th Floor", floorNumber: '5' }, { but: "6th Floor", floorNumber: '6' }, { but: "7th Floor", floorNumber: '7' }],
+            buttons: [{ btn: "Ground (1st Floor)", floorNumber: '1' }, { btn: "2nd Floor", floorNumber: '2' }, { btn: "3rd Floor", floorNumber: '3' }, { btn: "4th Floor", floorNumber: '4' }, { btn: "5th Floor", floorNumber: '5' }, { btn: "6th Floor", floorNumber: '6' }, { btn: "7th Floor", floorNumber: '7' }],
             userFloors: [{ userFloor: "Ground (1st Floor)", floorNumber: '1' }, { userFloor: "2nd Floor", floorNumber: '2' }, { userFloor: "3rd Floor", floorNumber: '3' }, { userFloor: "4th Floor", floorNumber: '4' }, { userFloor: "5th Floor", floorNumber: '5' }, { userFloor: "6th Floor", floorNumber: '6' }, { userFloor: "7th Floor", floorNumber: '7' }]
         };
     },
@@ -1020,8 +1020,9 @@ Vue.component('buttons-list', {
                 userFloor: userFloor,
                 floorRequest: floorRequest
             }).then(function (response) {
+                console.log(response['data']);
 
-                if (response['data']['destination'] == 2 || response['data']['destination'] == 4) {
+                if (response['data']['direction'] == 'empty') {
                     app.elevator = "Floor " + response['data']['destination'] + " is down for maintenance";
                     app.destination = "Please choose a different floor";
                 } else {
@@ -1033,7 +1034,7 @@ Vue.component('buttons-list', {
     }
 });
 
-Vue.component('but', {
+Vue.component('btn', {
 
     props: ['floorNumber'],
 

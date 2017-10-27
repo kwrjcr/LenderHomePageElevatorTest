@@ -4,9 +4,10 @@ namespace ElevatorApp\Http\Controllers;
 
 use Illuminate\Http\Request;
 use ElevatorApp\Elevators;
-use ElevatorApp\ElevatorCollection;
+use ElevatorApp\ElevatorsCollection;
 use ElevatorApp\FloorRequests;
 use ElevatorApp\RequestsLog;
+use ElevatorApp\Floor;
 
 
 class ElevatorController extends Controller
@@ -34,7 +35,7 @@ class ElevatorController extends Controller
         $requestLog->save();
 
         $chosenElevators = [];
-        $elevator = Elevator::all();
+        $elevator = Elevators::all();
 
         if($elevator->getAvailable($floor)->count() > 0) {
             $chosenElevators = $elevator->getAvailable($floor);
@@ -45,19 +46,38 @@ class ElevatorController extends Controller
         };
 
 
-        $id = current($chosenElevators)->id;
+        foreach($chosenElevators as $chosenElevator) {
+            $id = $chosenElevator->id;
+        }
+
+        $floorTable = Floor::find($floorRequest);
+        $floorStatus = $floorTable->status;
+
+        $userCurrentFloor = Floor::find($floor);
+        $userFloorStatus = $userCurrentFloor->status;
 
 
-        //check this
-        if ($floorRequest == 2 || $floorRequest == 4) {
+        if ($floorStatus == 'maintenance' || $userFloorStatus == 'maintenance') {
+
+            $vueReturn['destination'] = ($floorStatus == 'maintenance') ? $floorRequest : $floor;
+            $vueReturn['direction'] = 'empty';
+            $vueReturn['signal'] = 'empty';
+            $vueReturn['currentFloor'] = 'empty';
+            $vueReturn['id'] = 'empty';
 
         } else {
-            $elevatorRequest = Elevator::find($id);
+            $elevatorRequest = Elevators::find($id);
 
             $elevatorRequest->destination = $floorRequest;
             $elevatorRequest->save();
+
+            $vueReturn['destination'] = $elevatorRequest->destination;
+            $vueReturn['direction'] = $elevatorRequest->direction;
+            $vueReturn['signal'] = $elevatorRequest->signal;
+            $vueReturn['currentFloor'] = $elevatorRequest->currentFloor;
+            $vueReturn['id'] = $elevatorRequest->id;
         }
 
-        return ['destination' => $elevatorRequest->destination, 'direction' => $elevatorRequest->direction, 'signal' => $elevatorRequest->signal, 'currentFloor' => $elevatorRequest->currentFloor, 'id' => $elevatorRequest->id];
+        return ['destination' => $vueReturn['destination'], 'direction' => $vueReturn['direction'], 'signal' => $vueReturn['signal'], 'currentFloor' => $vueReturn['currentFloor'], 'id' => $vueReturn['id']];
     }
 }

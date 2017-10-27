@@ -23,6 +23,6 @@ class Elevators extends Model
     */
    public function newCollection(array $models = [])
    {
-       return new ElevatorCollection($models);
+       return new ElevatorsCollection($models);
    }
 }
